@@ -11,7 +11,7 @@ ancestor(X,Y) :-
 %% maths
 
 count(0, []).
-count(Count, [Head|Tail]) :-
+count(Count, [_|Tail]) :-
     count(TailCount, Tail), Count is TailCount + 1.
 
 sum(0,[]).
@@ -26,3 +26,34 @@ average(Average, L) :-
 concat([],List,List).
 concat([Head|Tail1], List1, [Head|Tail2]) :-
     concat(Tail1, List1, Tail2).
+
+
+%% exercises
+
+%% reversing a list
+
+reverse([],[]).
+reverse([Head|Tail], B) :-
+    reverse(Tail, Tail2),
+    concat(Tail2, [Head], B).
+
+% find minimum in a list
+
+min([Head|[]],Head).
+min([Head|Tail], Head) :-
+    min(Tail,TailMin),
+    Head =< TailMin.
+min([Head|Tail], TailMin) :-
+    min(Tail,TailMin),
+    Head > TailMin.
+
+% sort a list
+sorted([]).
+sorted([_]).
+sorted([A,B|Tail]) :-
+    A =< B,
+    sorted([B|Tail]).
+
+sort2(List,Sorted) :-
+    permutation(List, Sorted),
+    sorted(Sorted).
