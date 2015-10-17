@@ -20,3 +20,9 @@ sum(Sum, [Head|Tail]) :-
 
 average(Average, L) :-
     sum(Sum, L), count(Count, L), Average is Sum/Count.
+
+%% self written concat
+
+concat([],List,List).
+concat([Head|Tail1], List1, [Head|Tail2]) :-
+    concat(Tail1, List1, Tail2).
